@@ -7,13 +7,14 @@
 #include <string_view>
 #include <string_view>
 #include "Parser.cpp"
+#include "Code.cpp"
 #include "CommandType.h"
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
-    ifstream myfile("samples/Add.asm");
+    ifstream myfile("samples/PongL.asm");
     string myline;
 
     vector<string> line;
@@ -31,8 +32,10 @@ int main(int argc, char **argv)
             {
                 // Remove \r
                 myline.erase(std::remove(myline.begin(), myline.end(), '\r'), myline.end());
-
-                line.push_back(myline);
+                if (!myline.empty())
+                {
+                    line.push_back(myline);
+                }
             }
         }
     }
@@ -44,6 +47,9 @@ int main(int argc, char **argv)
     for (auto val : line)
     {
         Parser p{val};
+        // cout << val << endl;
+        Code c{p.getCommand(), p.getSymbol(), p.getDest(), p.getComp(), p.getJmp()};
+        cout << c.getBinary() << endl;
     }
 
     return 0;

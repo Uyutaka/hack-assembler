@@ -114,18 +114,22 @@ public:
     {
         return type_;
     }
+    
     string getSymbol()
     {
         return symbol_;
     }
+    
     string getComp()
     {
         return comp_;
     }
+    
     string getDest()
     {
         return dest_;
     }
+
     string getJmp()
     {
         return jump_;
